@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<{$xoops_langcode}>" lang="<{$xoops_langcode}>">
+<head>
+
+<{assign var=theme_name value=$xoTheme->folderName}>
+
+	<title><{$xoops_pagetitle}> : <{$xoops_sitename}></title>
+
+	<meta name="robots" content="<{$xoops_meta_robots}>" />
+	<meta name="keywords" content="<{$xoops_meta_keywords}>" />
+	<meta name="description" content="<{$xoops_meta_description}>" />
+	<meta name="rating" content="<{$xoops_meta_rating}>" />
+	<meta name="author" content="<{$xoops_meta_author}>" />
+	<meta name="copyright" content="<{$xoops_meta_copyright}>" />
+	<meta name="generator" content="XOOPS" />
+
+	<link rel="shortcut icon" type="image/ico" href="<{xoImgUrl /favicon.ico}>" />
+	<link rel="icon" type="image/png" href="<{xoImgUrl /icon.png}>" />
+	<link rel="stylesheet" type="text/css" media="all" title="Blue" href="<{xoImgUrl /style.css}>" />
+	
+	<{$xoops_module_header}>
+	
+</head>
+
+<body> 
+  
+<div id="headerbanner"><{$xoops_banner}></div>
+<!-- Header -->
+<table cellspacing="0" class="main" align="center">
+  <tr>
+    <td  id="headerbarleft">EMPTY CELL</td>
+    <td id="headerbarcenter"><a href="<{xoAppUrl /}>"><img src="<{xoImgUrl img/logo.jpg}>" alt="" border="0" /></a></td>
+    <td id="headerbarright">EMPTY CELL</td>
+  </tr>
+  <tr>
+    <td colspan="3">
+	        <table cellspacing="0" id="topMenu" >
+			  <tr>
+				<td><a href="<{xoAppUrl /}>">home</a></td>
+				<td><a href="<{xoAppUrl /modules/news}>">news</a></td>
+				<td><a href="<{xoAppUrl /modules/article}>">articles</a></td>
+				<td><a href="<{xoAppUrl /modules/newbb}>">forum</a></td>
+				<td><a href="<{xoAppUrl /modules/extgallery}>">gallery</a></td>
+				<td><a href="<{xoAppUrl /modules/extcal}>">events</a></td>
+				<td><a href="<{xoAppUrl /modules/formulaire}>">contact</a></td>
+			  </tr>
+			</table>
+	</td>
+  </tr>
+  <tr>
+    <td colspan="3" id="userSection"><{$smarty.now|date_format:"%A, %B %e, %Y"}> | <{if $xoops_isuser}>  Hello <a href="<{xoAppUrl /user.php}>"><{$xoops_uname}></a> |  
+        <a href="<{xoAppUrl /user.php?op=logout}>">logout</a> 
+       <{else}> <a href="<{xoAppUrl /user.php}>">Login</a> 
+       <{/if}>	</td>
+  </tr>
+</table>
+
+<!-- content -->
+<table  cellspacing="0" class="main" align="center">
+  <tr>
+	<!-- left column --> 
+     <{if $xoops_showlblock}>
+      <td id="leftcolumn">
+        <{foreach item=block from=$xoBlocks.canvas_left}>
+          <{includeq file="$theme_name/blocks-col-l.html"}>
+        <{/foreach}></td>
+     <{/if}>
+	<!-- left column- 2 --> 
+	 <{if $xoBlocks.page_bottomleft or $xoBlocks.page_bottomright or $xoBlocks.page_bottomcenter}>
+    <td id="leftcolumn2"><{foreach from=$xoBlocks.page_bottomcenter item=block}><{includeq file="$theme_name/blocks-c.html"}>
+	<{/foreach}></td><{/if}>
+	<!-- main content area --> 
+	<td id="centercolumn">
+		 <{if $xoBlocks.page_topleft or $xoBlocks.page_topcenter or $xoBlocks.page_topright}>
+		 <table cellspacing="0" class="centercol">
+		<tr>
+		 <td id="centerCcolumn" colspan="2">
+			<{foreach item=block from=$xoBlocks.page_topcenter}> <{includeq file="$theme_name/blocks-c.html"}><{/foreach}>
+		</td>
+		</tr>
+		<tr>
+		<td id="centerLcolumn">
+			<{foreach item=block from=$xoBlocks.page_topleft}> <{includeq file="$theme_name/blocks-c.html"}><{/foreach}></td>
+		 <td id="centerRcolumn">
+			<{foreach item=block from=$xoBlocks.page_topright}> <{includeq file="$theme_name/blocks-c.html"}><{/foreach}></td>
+		</tr>
+	</table>
+	<{/if}>
+	  <div id="content"> <{$xoops_contents}> </div>
+	<{if $xoBlocks.page_bottomleft or $xoBlocks.page_bottomright or $xoBlocks.page_bottomcenter}>
+	  <table cellspacing="0" class="centercol">
+<!--	<{if $xoBlocks.page_bottomcenter}>
+		<tr>
+		  <td id="bottomCcolumn" colspan="2"><{foreach from=$xoBlocks.page_bottomcenter item=block}><{includeq file="$theme_name/blocks-c.html"}><{/foreach}></td>
+		</tr>
+-->	<{/if}> <{if $xoBlocks.page_bottomleft or $xoBlocks.page_bottomright}>
+		<tr>
+		  <td id="bottomLcolumn"><{foreach from=$xoBlocks.page_bottomleft item=block}><{includeq file="$theme_name/blocks-c.html"}><{/foreach}></td>
+		  <td id="bottomRcolumn"><{foreach from=$xoBlocks.page_bottomright item=block}><{includeq file="$theme_name/blocks-c.html"}><{/foreach}></td>
+		</tr>
+	<{/if}>
+	  </table>
+	<{/if}> </td>
+	<!-- right column --> 
+      <{if $xoops_showrblock}>
+      <td id="rightcolumn">
+        <{foreach item=block from=$xoBlocks.canvas_right}>
+          <{includeq file="$theme_name/blocks-col-r.html"}>
+        <{/foreach}>
+      </td>
+      <{/if}>
+  </tr>
+</table>
+<!-- footer -->
+<table  class="main" cellspacing="0" align="center">
+  <tr>
+    <td id="footer"><{$xoops_footer}><br />
+ Theme by <a href="http://www.xoops.org/userinfo.php?uid=20861">Exbanious</a>, optimized and upgraded by <a href="http://www.xoopsdesign.com">XOOPSDesign.com</a>
+ <br />
+ Powered by <a href="http://www.xoops.org"><img src="<{xoImgUrl img/xoops_feed.gif}>" alt="XOOPS" border="0" /></a></td>
+  </tr>
+</table>
+</body>
+</html>
+
